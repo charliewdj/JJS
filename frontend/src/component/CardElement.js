@@ -26,11 +26,11 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
                     {category}
                 </Typography>
                 <Typography variant="body2">
-                    Description: {description.split(" ").slice(0, 15).join(" ") + "..."}
+                    Deskripsi: {description.split(" ").slice(0, 15).join(" ") + "..."}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button disableElevation variant='contained' size="small" startIcon={<AddIcon />}><Link style={{ textDecoration: "none", color: "white", boxShadow: 0 }} to={`/job/${id}`}>More Details</Link></Button>
+                <Button disableElevation variant='contained' size="small" startIcon={<AddIcon />}><Link style={{ textDecoration: "none", color: "white", boxShadow: 0 }} to={`/job/${id}`}>Detail Pekerjaan</Link></Button>
             </CardActions>
         </Card>
     );

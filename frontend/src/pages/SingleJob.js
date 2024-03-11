@@ -21,14 +21,18 @@ const SingleJob = () => {
         dispatch(jobLoadSingleAction(id));
     }, [id]);
 
+    // const applyForAJob = () => {
+    //     dispatch(userApplyJobAction({
+    //         title: singleJob && singleJob.title,
+    //         description: singleJob && singleJob.description,
+    //         salary: singleJob && singleJob.salary,
+    //         location: singleJob && singleJob.location
+    //     }))
+    // }
+
     const applyForAJob = () => {
-        dispatch(userApplyJobAction({
-            title: singleJob && singleJob.title,
-            description: singleJob && singleJob.description,
-            salary: singleJob && singleJob.salary,
-            location: singleJob && singleJob.location
-        }))
-    }
+        window.open('https://www.facebook.com/profile.php?id=61555748623456', '_blank');
+    };
 
     return (
         <>
@@ -54,13 +58,13 @@ const SingleJob = () => {
                                                     {singleJob && singleJob.title}
                                                 </Typography>
                                                 <Typography variant="body2">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Salary</Box>: ${singleJob && singleJob.salary}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Gaji Bersih Tedori</Box>: ${singleJob && singleJob.salary}
                                                 </Typography>
                                                 <Typography variant="body2">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Category</Box>: {singleJob && singleJob.jobType ? singleJob.jobType.jobTypeName : "No category"}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Kategori</Box>: {singleJob && singleJob.jobType ? singleJob.jobType.jobTypeName : "No category"}
                                                 </Typography>
                                                 <Typography variant="body2">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Location</Box>: {singleJob && singleJob.location}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Lokasi</Box>: {singleJob && singleJob.location}
                                                 </Typography>
                                                 <Typography variant="body2" sx={{ pt: 2 }}>
                                                     {/* <h3>Job description:</h3> */}
@@ -72,7 +76,7 @@ const SingleJob = () => {
                             </Box>
                             <Box sx={{ flex: 1, p: 2 }}>
                                 <Card sx={{ p: 2, bgcolor: palette.primary.white }}>
-                                    <Button onClick={applyForAJob} sx={{ fontSize: "13px" }} variant='contained'>Applied for this Job</Button>
+                                    <Button onClick={applyForAJob} sx={{ fontSize: "13px" }} variant='contained'>DM Saya Untuk Daftar (Sebutkan No OP-...)</Button>
                                 </Card>
                             </Box>
 
