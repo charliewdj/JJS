@@ -61,7 +61,7 @@ const DashCreateJob = () => {
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
             dispatch(registerAjobAction(values))
-            dispatch(uploadFileAction(formik.values.pdfFile))
+            dispatch(uploadFileAction(values.pdfFile))
             // alert(JSON.stringify(values, null, 2));
             actions.resetForm();
         },
