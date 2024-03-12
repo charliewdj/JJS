@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux'
 import { jobTypeLoadAction } from '../../redux/actions/jobTypeAction';
-import { registerAjobAction } from '../../redux/actions/jobAction';
+import { registerAjobAction, uploadFileAction } from '../../redux/actions/jobAction';
 
 
 const validationSchema = yup.object({
@@ -26,6 +26,17 @@ const validationSchema = yup.object({
     jobType: yup
         .string('Enter a Category')
         .required('Category is required'),
+    // pdfFile: Yup.mixed() // Validate the file
+    // .required('PDF file is required')
+    // .test('fileSize', 'File size is too large', value => {
+    //     if (!value) return true; // Allow empty values (e.g., when no file is selected)
+    //     return value && value.size <= FILE_SIZE_LIMIT; // Define FILE_SIZE_LIMIT constant
+    // })
+    // .test('fileType', 'Invalid file type', value => {
+    //     if (!value) return true; // Allow empty values (e.g., when no file is selected)
+    //     return value && SUPPORTED_FORMATS.includes(value.type); // Define SUPPORTED_FORMATS constant
+    // }),
+
 });
 
 
@@ -50,10 +61,16 @@ const DashCreateJob = () => {
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
             dispatch(registerAjobAction(values))
+            dispatch(uploadFileAction(formik.values.pdfFile))
             // alert(JSON.stringify(values, null, 2));
             actions.resetForm();
         },
     });
+
+    // Function to handle file input change
+    const handleFileChange = event => {
+        formik.setFieldValue('pdfFile', event.currentTarget.files[0]);
+    };
 
 
 
@@ -146,6 +163,7 @@ const DashCreateJob = () => {
                             error={formik.touched.jobType && Boolean(formik.errors.jobType)}
                             helperText={formik.touched.jobType && formik.errors.jobType}
                         >
+
                             <MenuItem key={""} value={""}>
 
                             </MenuItem>
@@ -156,6 +174,20 @@ const DashCreateJob = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
+
+                        <TextField
+                            sx={{ mb: 3 }}
+                            fullWidth
+                            id="pdfFile"
+                            name="pdfFile"
+                            type="file" // Use type="file" for file input
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleFileChange} // Handle file input change
+                            error={formik.touched.pdfFile && Boolean(formik.errors.pdfFile)}
+                            helperText={formik.touched.pdfFile && formik.errors.pdfFile}
+                        />
 
                         <Button fullWidth variant="contained" type='submit' >Create job</Button>
                     </Box>

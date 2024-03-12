@@ -88,4 +88,27 @@ export const registerAjobAction = (job) => async (dispatch) => {
         })
         toast.error(error.response.data.error);
     }
+
+    
+}
+
+
+export const uploadFileAction = (job) => async (dispatch) => {
+    dispatch({ type: REGISTER_JOB_REQUEST })
+
+    try {
+        const { data } = await axios.post("/api/uploadfile", job)
+        dispatch({
+            type: REGISTER_JOB_SUCCESS,
+            payload: data
+        })
+        toast.success("file uploaded successfully");
+
+    } catch (error) {
+        dispatch({
+            type: REGISTER_JOB_FAIL,
+            payload: error.response.data.error
+        })
+        toast.error(error.response.data.error);
+    }
 }
