@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 var cors = require('cors');
 const path = require('path');
+// app.use("/files", express.static("files"));
+// app.use(express.static(path.join(__dirname, './files')));
+app.use('/files', express.static(path.join(__dirname, './files')));
 
 
 

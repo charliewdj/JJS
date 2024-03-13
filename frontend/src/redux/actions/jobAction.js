@@ -89,7 +89,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
         toast.error(error.response.data.error);
     }
 
-    
+
 }
 
 
@@ -97,7 +97,9 @@ export const uploadFileAction = (job) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
 
     try {
-        const { data } = await axios.post("/api/uploadfile", job)
+        const { data } = await axios.post("/api/uploadfile", job, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
         dispatch({
             type: REGISTER_JOB_SUCCESS,
             payload: data

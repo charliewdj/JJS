@@ -8,4 +8,4 @@ const PdfDetailsSchema = new mongoose.Schema(
   { collection: "PdfDetails" }
 );
 
-mongoose.model("PdfDetails", PdfDetailsSchema);
+module.exports = mongoose.model("PdfDetails", PdfDetailsSchema);

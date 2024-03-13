@@ -61,7 +61,9 @@ const DashCreateJob = () => {
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
             dispatch(registerAjobAction(values))
-            dispatch(uploadFileAction(values.pdfFile))
+            const formData = new FormData();
+            formData.append('file', values.file); // Add the file to the FormData object
+            dispatch(uploadFileAction(formData))
             // alert(JSON.stringify(values, null, 2));
             actions.resetForm();
         },
@@ -69,7 +71,7 @@ const DashCreateJob = () => {
 
     // Function to handle file input change
     const handleFileChange = event => {
-        formik.setFieldValue('pdfFile', event.currentTarget.files[0]);
+        formik.setFieldValue('file', event.currentTarget.files[0]);
     };
 
 
@@ -178,8 +180,8 @@ const DashCreateJob = () => {
                         <TextField
                             sx={{ mb: 3 }}
                             fullWidth
-                            id="pdfFile"
-                            name="pdfFile"
+                            id="file"
+                            name="file"
                             type="file" // Use type="file" for file input
                             InputLabelProps={{
                                 shrink: true,
