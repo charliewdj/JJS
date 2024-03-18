@@ -60,10 +60,11 @@ const DashCreateJob = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
-            dispatch(registerAjobAction(values))
+            
             const formData = new FormData();
             formData.append('file', values.file); // Add the file to the FormData object
-            dispatch(uploadFileAction(formData))
+            dispatch(registerAjobAction(values, formData))
+            // dispatch(uploadFileAction(formData))
             // alert(JSON.stringify(values, null, 2));
             actions.resetForm();
         },

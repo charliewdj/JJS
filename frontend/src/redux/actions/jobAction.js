@@ -70,7 +70,7 @@ export const deleteSingleJobAction = (job_id) => async (dispatch) => {
 }
 
 // register job action
-export const registerAjobAction = (job) => async (dispatch) => {
+export const registerAjobAction = (job, file) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
 
     try {
@@ -89,15 +89,8 @@ export const registerAjobAction = (job) => async (dispatch) => {
         toast.error(error.response.data.error);
     }
 
-
-}
-
-
-export const uploadFileAction = (job) => async (dispatch) => {
-    dispatch({ type: REGISTER_JOB_REQUEST })
-
     try {
-        const { data } = await axios.post("/api/uploadfile", job, {
+        const { data } = await axios.post("/api/uploadfile", file, {
             headers: { "Content-Type": "multipart/form-data" },
         })
         dispatch({
@@ -113,4 +106,29 @@ export const uploadFileAction = (job) => async (dispatch) => {
         })
         toast.error(error.response.data.error);
     }
+
+
 }
+
+
+// export const uploadFileAction = (job) => async (dispatch) => {
+//     dispatch({ type: REGISTER_JOB_REQUEST })
+
+//     try {
+//         const { data } = await axios.post("/api/uploadfile", job, {
+//             headers: { "Content-Type": "multipart/form-data" },
+//         })
+//         dispatch({
+//             type: REGISTER_JOB_SUCCESS,
+//             payload: data
+//         })
+//         toast.success("file uploaded successfully");
+
+//     } catch (error) {
+//         dispatch({
+//             type: REGISTER_JOB_FAIL,
+//             payload: error.response.data.error
+//         })
+//         toast.error(error.response.data.error);
+//     }
+// }

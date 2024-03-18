@@ -54,7 +54,7 @@ exports.deleteJobType = async (req, res, next) => {
             message: "Job type deleted"
         })
     } catch (error) {
-        next(new ErrorResponse("server error", 500));
+        next(new ErrorResponse("server error", 500));  
     }
 }
 
