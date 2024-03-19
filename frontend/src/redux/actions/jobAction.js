@@ -70,10 +70,17 @@ export const deleteSingleJobAction = (job_id) => async (dispatch) => {
 }
 
 // register job action
-export const registerAjobAction = (job, file) => async (dispatch) => {
+export const registerAjobAction = (job, file_pdf, file_image) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
 
     try {
+        // const formData = new FormData();
+        // formData.append('job', JSON.stringify(job)); // Convert job object to string
+        // formData.append('file', file);
+
+        // const { data } = await axios.post("/api/job/create", formData, {
+        //     headers: { "Content-Type": "multipart/form-data" },
+        // });
         const { data } = await axios.post("/api/job/create", job)
         dispatch({
             type: REGISTER_JOB_SUCCESS,
@@ -90,14 +97,32 @@ export const registerAjobAction = (job, file) => async (dispatch) => {
     }
 
     try {
-        const { data } = await axios.post("/api/uploadfile", file, {
+        const { data } = await axios.post("/api/uploadfile", file_pdf, {
             headers: { "Content-Type": "multipart/form-data" },
         })
         dispatch({
             type: REGISTER_JOB_SUCCESS,
             payload: data
         })
-        toast.success("file uploaded successfully");
+        toast.success("PDF file uploaded successfully");
+
+    } catch (error) {
+        dispatch({
+            type: REGISTER_JOB_FAIL,
+            payload: error.response.data.error
+        })
+        toast.error(error.response.data.error);
+    }
+
+    try {
+        const { data } = await axios.post("/api/uploadfile", file_image, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+        dispatch({
+            type: REGISTER_JOB_SUCCESS,
+            payload: data
+        })
+        toast.success("Image file uploaded successfully");
 
     } catch (error) {
         dispatch({

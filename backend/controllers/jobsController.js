@@ -5,13 +5,21 @@ const ErrorResponse = require('../utils/errorResponse');
 //create job
 exports.createJob = async (req, res, next) => {
     try {
+        console.log("JOB UPLOAD")
+        // console.log(req.body.job)
+        // const jobData = JSON.parse(req.body.job);
+        // console.log("JOBDATA NII" + jobData)
+        // console.log(jobData.pdf)
+
         const job = await Job.create({
             title: req.body.title,
             description: req.body.description,
             salary: req.body.salary,
             location: req.body.location,
             jobType: req.body.jobType,
-            user: req.user.id
+            user: req.user.id,
+            pdf: req.body.pdf,
+            image: req.body.image,
         });
         res.status(201).json({
             success: true,
@@ -20,6 +28,7 @@ exports.createJob = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+
 }
 
 

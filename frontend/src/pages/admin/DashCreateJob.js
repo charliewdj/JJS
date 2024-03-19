@@ -56,14 +56,18 @@ const DashCreateJob = () => {
             description: '',
             salary: '',
             location: '',
-            jobType: ''
+            jobType: '',
+            pdf: "",
+            image: "",
         },
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
-            
-            const formData = new FormData();
-            formData.append('file', values.file); // Add the file to the FormData object
-            dispatch(registerAjobAction(values, formData))
+
+            const formData_pdf = new FormData();
+            const formData_image = new FormData();
+            formData_pdf.append('file', values.pdf_file); // Add the file to the FormData object
+            formData_image.append('file', values.image_file);
+            dispatch(registerAjobAction(values, formData_pdf, formData_image))
             // dispatch(uploadFileAction(formData))
             // alert(JSON.stringify(values, null, 2));
             actions.resetForm();
@@ -72,7 +76,15 @@ const DashCreateJob = () => {
 
     // Function to handle file input change
     const handleFileChange = event => {
-        formik.setFieldValue('file', event.currentTarget.files[0]);
+        formik.setFieldValue('pdf', event.currentTarget.files[0].name);
+        console.log(event.currentTarget.files[0])
+        formik.setFieldValue('pdf_file', event.currentTarget.files[0]);
+    };
+
+    const handleFileChange_image = event => {
+        formik.setFieldValue('image', event.currentTarget.files[0].name);
+        console.log(event.currentTarget.files[0])
+        formik.setFieldValue('image_file', event.currentTarget.files[0]);
     };
 
 
@@ -181,13 +193,27 @@ const DashCreateJob = () => {
                         <TextField
                             sx={{ mb: 3 }}
                             fullWidth
-                            id="file"
-                            name="file"
+                            id="pdf_file"
+                            name="pdf_file"
                             type="file" // Use type="file" for file input
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={handleFileChange} // Handle file input change
+                            error={formik.touched.pdfFile && Boolean(formik.errors.pdfFile)}
+                            helperText={formik.touched.pdfFile && formik.errors.pdfFile}
+                        />
+
+                        <TextField
+                            sx={{ mb: 3 }}
+                            fullWidth
+                            id="image_file"
+                            name="image_file"
+                            type="file" // Use type="file" for file input
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleFileChange_image} // Handle file input change
                             error={formik.touched.pdfFile && Boolean(formik.errors.pdfFile)}
                             helperText={formik.touched.pdfFile && formik.errors.pdfFile}
                         />

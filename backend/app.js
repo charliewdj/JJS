@@ -54,7 +54,7 @@ app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', jobTypeRoute);
 app.use('/api', jobRoute);
-app.use('/api', filesRoutes)
+app.use('/api', filesRoutes);
 
 __dirname = path.resolve()
 
