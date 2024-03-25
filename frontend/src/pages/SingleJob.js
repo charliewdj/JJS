@@ -1,6 +1,6 @@
 import { Card, CardContent, Stack, Typography } from '@mui/material'
 import { Box, Container } from '@mui/system'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Footer from '../component/Footer'
@@ -10,6 +10,7 @@ import { jobLoadSingleAction } from '../redux/actions/jobAction'
 import Button from '@mui/material/Button'
 import { userApplyJobAction } from '../redux/actions/userAction'
 import { useTheme } from '@emotion/react'
+import PdfComp from "./pdfComp";
 
 
 const SingleJob = () => {
@@ -17,6 +18,7 @@ const SingleJob = () => {
     const dispatch = useDispatch();
     const { singleJob, loading } = useSelector(state => state.singleJob)
     const { id } = useParams();
+    const [pdfFile, setPdfFile] = useState(null);
     useEffect(() => {
         dispatch(jobLoadSingleAction(id));
     }, [id]);
@@ -33,6 +35,12 @@ const SingleJob = () => {
     const applyForAJob = () => {
         window.open('https://www.facebook.com/profile.php?id=61555748623456', '_blank');
     };
+
+    // setPdfFile(`http://localhost:9000/files/${singleJob.pdf}`)
+
+    // console.log(singleJob.description)
+
+    console.log(singleJob);
 
     return (
         <>
@@ -69,6 +77,12 @@ const SingleJob = () => {
                                                 <Typography variant="body2" sx={{ pt: 2 }}>
                                                     {/* <h3>Job description:</h3> */}
                                                     {singleJob && singleJob.description}
+                                                </Typography>
+                                                <Typography>
+                                                    {/* <PdfComp pdfFile={`http://localhost:9000/files/${singleJob.pdf}`}/> */}
+                                                    {singleJob && (
+                                                        <PdfComp pdfFile={`http://localhost:9000/files/${singleJob.pdf}`} />
+                                                    )}
                                                 </Typography>
                                             </CardContent>
                                         </Card>

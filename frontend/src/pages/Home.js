@@ -105,6 +105,7 @@ const Home = () => {
                                         jobs && jobs.map((job, i) => (
                                             <CardElement
                                                 key={i}
+                                                image={job.image}
                                                 id={job._id}
                                                 jobTitle={job.title}
                                                 description={job.description}

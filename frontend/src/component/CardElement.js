@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 
 
-const CardElement = ({ jobTitle, description, category, location, id }) => {
+const CardElement = ({ jobTitle, description, category, location, id, image }) => {
     const { palette } = useTheme();
     return (
         <Card sx={{ minWidth: 275, mb: 3, mt: 3, bgcolor: palette.primary.white }}>
@@ -19,6 +19,13 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
                 <Typography sx={{ fontSize: 15, color: palette.secondary.main, fontWeight: 500 }} gutterBottom>
                     <IconButton><LocationOnIcon sx={{ color: palette.secondary.main, fontSize: 18 }} /></IconButton> {location}
                 </Typography>
+                {/* <CardMedia
+                    component="img"
+                    height="140"
+                    image={`http://localhost:9000/files/${image}`} // Replace imageUrl with the URL of your image
+                    alt="Job Image"
+                /> */}
+                <Typography component="img" src={`http://localhost:9000/files/${image}`} alt="Job Image" style={{ height: '200px', width: '400px', objectFit: 'cover' }} />
                 <Typography variant="h5" component="div">
                     {jobTitle}
                 </Typography>
