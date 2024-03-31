@@ -24,15 +24,39 @@ const filesRoutes = require('./routes/filesRoutes');
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middleware/error");
 
-//database connection
+// //database connection
+// const client = mongoose.connect(process.env.DATABASE, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false
+// })
+//   .then(() => console.log("DB connected"))
+//   .catch((err) => console.log(err));
+
+
+// // create GridFS bucket instance named "myBucketName"
+// const bucket = new mongoose.GridFSBucket(client, {
+//   bucketName: "myBucketName"
+// })
+
+
+// database connection
 mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
 })
-  .then(() => console.log("DB connected"))
-  .catch((err) => console.log(err));
+.then(() => {
+  console.log("DB connected");
+  // create GridFS bucket instance named "myBucketName"
+  const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+    bucketName: "myBucketName"
+  });
+}) 
+.catch((err) => console.error(err));
+
 
 //MIDDLEWARE
 if (process.env.NODE_ENV === 'development') {

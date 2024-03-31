@@ -25,7 +25,7 @@ const CardElement = ({ jobTitle, description, category, location, id, image }) =
                     image={`http://localhost:9000/files/${image}`} // Replace imageUrl with the URL of your image
                     alt="Job Image"
                 /> */}
-                <Typography component="img" src={`http://localhost:9000/files/${image}`} alt="Job Image" style={{ height: '200px', width: '400px', objectFit: 'cover' }} />
+                <Typography component="img" src={`api/getfile?filename=${image}`} alt="Job Image" style={{ height: '200px', width: '400px', objectFit: 'cover' }} />
                 <Typography variant="h5" component="div">
                     {jobTitle}
                 </Typography>
