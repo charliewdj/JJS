@@ -1,9 +1,48 @@
 const PdfSchema = require('../models/pdfDetailsModel');
+const { useState } = require('react');
 const ErrorResponse = require('../utils/errorResponse');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const { GridFSBucket } = require('mongoose');
+const firebase = require("firebase/compat/app");
+require("firebase/compat/storage");
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAfDVdQenz4eMX81M4e9MqCz6RJ1X0S6Ec",
+    authDomain: "jjs-files-storage-db.firebaseapp.com",
+    projectId: "jjs-files-storage-db",
+    storageBucket: "jjs-files-storage-db.appspot.com",
+    messagingSenderId: "263748868699",
+    appId: "1:263748868699:web:b90334cd377154d88a3d7e"
+  };
+
+firebase.initializeApp(firebaseConfig)
+
+
+exports.uploadFile = async (req, res, next) => {
+    
+    const file = req.file
+    console.log(file)
+
+    const fileName = file.filename
+    console.log(fileName)
+
+    if(file) {
+        const storageRef = firebase.storage().ref()
+        const fileRef = storageRef.child(fileName)
+
+        fileRef.put(file)
+        .then((snapshot) => {
+            snapshot.ref.getDownloadURL()
+            .then((downloadURL) => {
+                console.log(downloadURL)
+            })
+        })
+    } else {
+        console.log("Error !!")
+    }
+}
 
 //upload the pdf file
 // exports.uploadFile = async (req, res, next) => {
@@ -11,7 +50,7 @@ const { GridFSBucket } = require('mongoose');
 //     console.log(req.file);
 //     // const title = req.body.title;
 //     const fileName = req.file.filename;
-//     console.log(req.file.fileName)
+//     // console.log(req.file.fileName)
 //     try {
 //         await PdfSchema.create({ title: 'TEST', pdf: fileName });
 //         console.log('SUPPOSED TO BE CREATED PDFSCHEMA')
@@ -118,7 +157,6 @@ const { GridFSBucket } = require('mongoose');
 exports.getFile = async (req, res) => {
 
     console.log('ENHEEE')
-
     const filename = req.query.filename;
 
     // Specify the path to the folder containing your files
