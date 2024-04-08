@@ -81,7 +81,7 @@ const SingleJob = () => {
                                                 <Typography>
                                                     {/* <PdfComp pdfFile={`http://localhost:9000/files/${singleJob.pdf}`}/> */}
                                                     {singleJob && (
-                                                        <PdfComp pdfFile={`http://localhost:9000/files/${singleJob.pdf}`} />
+                                                        <PdfComp pdfFile={`${singleJob.pdf}`} />
                                                     )}
                                                 </Typography>
                                             </CardContent>

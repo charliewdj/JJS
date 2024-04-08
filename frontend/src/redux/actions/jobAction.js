@@ -70,7 +70,7 @@ export const deleteSingleJobAction = (job_id) => async (dispatch) => {
 }
 
 // register job action
-export const registerAjobAction = (job, file_pdf, file_image) => async (dispatch) => {
+export const registerAjobAction = (job) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
 
     try {
@@ -96,41 +96,41 @@ export const registerAjobAction = (job, file_pdf, file_image) => async (dispatch
         toast.error(error.response.data.error);
     }
 
-    try {
-        const { data } = await axios.post("/api/uploadfile", file_pdf, {
-            headers: { "Content-Type": "multipart/form-data" },
-        })
-        dispatch({
-            type: REGISTER_JOB_SUCCESS,
-            payload: data
-        })
-        toast.success("PDF file uploaded successfully");
+    // try {
+    //     const { data } = await axios.post("/api/uploadfile", file_pdf, {
+    //         headers: { "Content-Type": "multipart/form-data" },
+    //     })
+    //     dispatch({
+    //         type: REGISTER_JOB_SUCCESS,
+    //         payload: data
+    //     })
+    //     toast.success("PDF file uploaded successfully");
 
-    } catch (error) {
-        dispatch({
-            type: REGISTER_JOB_FAIL,
-            payload: error.response.data.error
-        })
-        toast.error(error.response.data.error);
-    }
+    // } catch (error) {
+    //     dispatch({
+    //         type: REGISTER_JOB_FAIL,
+    //         payload: error.response.data.error
+    //     })
+    //     toast.error(error.response.data.error);
+    // }
 
-    try {
-        const { data } = await axios.post("/api/uploadfile", file_image, {
-            headers: { "Content-Type": "multipart/form-data" },
-        })
-        dispatch({
-            type: REGISTER_JOB_SUCCESS,
-            payload: data
-        })
-        toast.success("Image file uploaded successfully");
+    // try {
+    //     const { data } = await axios.post("/api/uploadfile", file_image, {
+    //         headers: { "Content-Type": "multipart/form-data" },
+    //     })
+    //     dispatch({
+    //         type: REGISTER_JOB_SUCCESS,
+    //         payload: data
+    //     })
+    //     toast.success("Image file uploaded successfully");
 
-    } catch (error) {
-        dispatch({
-            type: REGISTER_JOB_FAIL,
-            payload: error.response.data.error
-        })
-        toast.error(error.response.data.error);
-    }
+    // } catch (error) {
+    //     dispatch({
+    //         type: REGISTER_JOB_FAIL,
+    //         payload: error.response.data.error
+    //     })
+    //     toast.error(error.response.data.error);
+    // }
 
 
 }

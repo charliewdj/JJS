@@ -63,11 +63,11 @@ const DashCreateJob = () => {
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
 
-            const formData_pdf = new FormData();
-            const formData_image = new FormData();
-            formData_pdf.append('file', values.pdf_file); // Add the file to the FormData object
-            formData_image.append('file', values.image_file);
-            dispatch(registerAjobAction(values, formData_pdf, formData_image))
+            // const formData_pdf = new FormData();
+            // const formData_image = new FormData();
+            // formData_pdf.append('file', values.pdf_file); // Add the file to the FormData object
+            // formData_image.append('file', values.image_file);
+            dispatch(registerAjobAction(values))
             // dispatch(uploadFileAction(formData))
             // alert(JSON.stringify(values, null, 2));
             actions.resetForm();
@@ -166,6 +166,40 @@ const DashCreateJob = () => {
 
                         <TextField sx={{ mb: 3 }}
                             fullWidth
+                            id="pdf"
+                            name="pdf"
+                            label="pdf"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="pdf Url"
+                            value={formik.values.pdf}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.pdf && Boolean(formik.errors.pdf)}
+                            helperText={formik.touched.pdf && formik.errors.pdf}
+                        />
+
+                        <TextField sx={{ mb: 3 }}
+                            fullWidth
+                            id="image"
+                            name="image"
+                            label="image"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="image url"
+                            value={formik.values.image}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.image && Boolean(formik.errors.image)}
+                            helperText={formik.touched.image && formik.errors.image}
+                        />
+
+                        <TextField sx={{ mb: 3 }}
+                            fullWidth
                             className="px-2 my-2"
                             variant="outlined"
                             name="jobType"
@@ -190,7 +224,7 @@ const DashCreateJob = () => {
                             ))}
                         </TextField>
 
-                        <TextField
+                        {/* <TextField
                             sx={{ mb: 3 }}
                             fullWidth
                             id="pdf_file"
@@ -202,9 +236,9 @@ const DashCreateJob = () => {
                             onChange={handleFileChange} // Handle file input change
                             error={formik.touched.pdfFile && Boolean(formik.errors.pdfFile)}
                             helperText={formik.touched.pdfFile && formik.errors.pdfFile}
-                        />
+                        /> */}
 
-                        <TextField
+                        {/* <TextField
                             sx={{ mb: 3 }}
                             fullWidth
                             id="image_file"
@@ -216,7 +250,7 @@ const DashCreateJob = () => {
                             onChange={handleFileChange_image} // Handle file input change
                             error={formik.touched.pdfFile && Boolean(formik.errors.pdfFile)}
                             helperText={formik.touched.pdfFile && formik.errors.pdfFile}
-                        />
+                        /> */}
 
                         <Button fullWidth variant="contained" type='submit' >Create job</Button>
                     </Box>
