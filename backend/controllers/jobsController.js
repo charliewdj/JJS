@@ -16,6 +16,8 @@ exports.createJob = async (req, res, next) => {
             description: req.body.description,
             salary: req.body.salary,
             location: req.body.location,
+            requirements: req.body.requirements,
+            benefits: req.body.benefits,
             jobType: req.body.jobType,
             user: req.user.id,
             pdf: req.body.pdf,

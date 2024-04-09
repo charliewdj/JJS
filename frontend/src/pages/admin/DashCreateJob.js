@@ -56,6 +56,8 @@ const DashCreateJob = () => {
             description: '',
             salary: '',
             location: '',
+            requirements: "",
+            benefits: "",
             jobType: '',
             pdf: "",
             image: "",
@@ -117,6 +119,8 @@ const DashCreateJob = () => {
                         />
                         <TextField sx={{ mb: 3 }}
                             fullWidth
+                            multiline
+                            rows={8} // Adjust the number of rows as needed
                             id="description"
                             name="description"
                             label="Description"
@@ -162,6 +166,40 @@ const DashCreateJob = () => {
                             onBlur={formik.handleBlur}
                             error={formik.touched.location && Boolean(formik.errors.location)}
                             helperText={formik.touched.location && formik.errors.location}
+                        />
+
+                        <TextField sx={{ mb: 3 }}
+                            fullWidth
+                            id="requirements"
+                            name="requirements"
+                            label="requirements"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="requirements"
+                            value={formik.values.requirements}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.requirements && Boolean(formik.errors.requirements)}
+                            helperText={formik.touched.requirements && formik.errors.requirements}
+                        />
+
+                        <TextField sx={{ mb: 3 }}
+                            fullWidth
+                            id="benefits"
+                            name="benefits"
+                            label="benefits"
+                            type="text"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="benefits"
+                            value={formik.values.benefits}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.benefits && Boolean(formik.errors.benefits)}
+                            helperText={formik.touched.benefits && formik.errors.benefits}
                         />
 
                         <TextField sx={{ mb: 3 }}

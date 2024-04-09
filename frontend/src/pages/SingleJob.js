@@ -11,6 +11,8 @@ import Button from '@mui/material/Button'
 import { userApplyJobAction } from '../redux/actions/userAction'
 import { useTheme } from '@emotion/react'
 import PdfComp from "./pdfComp";
+import PdfComp2 from "./pdfComp2";
+import { useMediaQuery } from '@mui/material';
 
 
 const SingleJob = () => {
@@ -19,6 +21,8 @@ const SingleJob = () => {
     const { singleJob, loading } = useSelector(state => state.singleJob)
     const { id } = useParams();
     const [pdfFile, setPdfFile] = useState(null);
+    const isMobile = useMediaQuery('(max-width:600px)');
+
     useEffect(() => {
         dispatch(jobLoadSingleAction(id));
     }, [id]);
@@ -62,26 +66,32 @@ const SingleJob = () => {
 
                                         <Card sx={{ bgcolor: palette.primary.white }} >
                                             <CardContent>
-                                                <Typography variant="h5" component="h3">
+                                                <Typography variant="h3" component="h3">
                                                     {singleJob && singleJob.title}
                                                 </Typography>
-                                                <Typography variant="body2">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Gaji Bersih Tedori</Box>: ${singleJob && singleJob.salary}
+                                                <Typography variant="body1">
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Gaji Bersih Tedori</Box>: ¥{singleJob && singleJob.salary}
                                                 </Typography>
-                                                <Typography variant="body2">
+                                                <Typography variant="body1">
                                                     <Box component="span" sx={{ fontWeight: 700 }}>Kategori</Box>: {singleJob && singleJob.jobType ? singleJob.jobType.jobTypeName : "No category"}
                                                 </Typography>
-                                                <Typography variant="body2">
+                                                <Typography variant="body1">
                                                     <Box component="span" sx={{ fontWeight: 700 }}>Lokasi</Box>: {singleJob && singleJob.location}
                                                 </Typography>
-                                                <Typography variant="body2" sx={{ pt: 2 }}>
-                                                    {/* <h3>Job description:</h3> */}
-                                                    {singleJob && singleJob.description}
+                                                <Typography variant="body1">
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Syarat</Box>: {singleJob && singleJob.requirements}
                                                 </Typography>
-                                                <Typography>
-                                                    {/* <PdfComp pdfFile={`http://localhost:9000/files/${singleJob.pdf}`}/> */}
-                                                    {singleJob && (
-                                                        <PdfComp pdfFile={`${singleJob.pdf}`} />
+                                                <Typography variant="body1">
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Fasilitas</Box>: {singleJob && singleJob.benefits}
+                                                </Typography>
+
+                                                <Typography variant="body1" sx={{ pt: 2 }} dangerouslySetInnerHTML={{ __html: singleJob && singleJob.description }} />
+
+                                                <Typography sx={{ pt: 5 }}>
+                                                    {isMobile ? ( // Render PdfComp for mobile, PdfComp2 for desktop
+                                                        singleJob && <PdfComp pdfFile={`${singleJob.pdf}`} />
+                                                    ) : (
+                                                        singleJob && <PdfComp2 pdfFile={`${singleJob.pdf}`} />
                                                     )}
                                                 </Typography>
                                             </CardContent>

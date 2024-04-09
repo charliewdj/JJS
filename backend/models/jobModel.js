@@ -25,6 +25,12 @@ const jobSchema = new mongoose.Schema({
     location: {
         type: String,
     },
+    requirements: {
+        type: String,
+    },
+    benefits: {
+        type: String,
+    },
     available: {
         type: Boolean,
         default: true
