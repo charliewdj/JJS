@@ -70,7 +70,7 @@ const SingleJob = () => {
                                                     {singleJob && singleJob.title}
                                                 </Typography>
                                                 <Typography variant="body1">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Gaji Bersih Tedori</Box>: ¥{singleJob && singleJob.salary}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Gaji</Box>: ¥{singleJob && singleJob.salary}
                                                 </Typography>
                                                 <Typography variant="body1">
                                                     <Box component="span" sx={{ fontWeight: 700 }}>Kategori</Box>: {singleJob && singleJob.jobType ? singleJob.jobType.jobTypeName : "No category"}
